@@ -39,7 +39,10 @@ app.get('/', async(req: Request, res: Response) => {
     const bodyContents = await streamToString(data.Body) as string;
     console.log(bodyContents,"💎 💎 💎 ") 
     const secretsJSON = JSON.parse(bodyContents);
-      
+  
+    /**
+     *? 1. For more security these secrets can be passed through a middleware and use from it which will make it stateless
+     */
     let secretsString = "";
     console.log(data," 🔥  🔥  🔥 ")
     Object.keys(secretsJSON).forEach((key) => {
