@@ -22,7 +22,7 @@ app.get('/', async(req: Request, res: Response) => {
   res.send('Express + TypeScript Server');
   try {
       // Create a helper function to convert a ReadableStream to a string.
-      const streamToString = (stream:any) =>
+      const streamToString = (stream:any): Promise<string> =>
       new Promise((resolve, reject) => {
         const chunks:any = [];
         stream.on("data", (chunk:any) => chunks.push(chunk));
@@ -36,7 +36,7 @@ app.get('/', async(req: Request, res: Response) => {
     };
 
     const data = await S3.send(new GetObjectCommand(getObject));
-    const bodyContents = await streamToString(data.Body) as string;
+    const bodyContents = await streamToString(data.Body) ;
     console.log(bodyContents,"💎 💎 💎 ") 
     const secretsJSON = JSON.parse(bodyContents);
   
